@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
         {
             playerRB.AddForce(transform.up * speed * Time.deltaTime);
             fuel -= 0.1f;
-            //Debug.Log(fuel);
             fire.Play();
         }
 
