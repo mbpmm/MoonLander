@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LogoFade : MonoBehaviour
+public class GameLogoFade : MonoBehaviour
 {
     public GameObject image;
 
@@ -39,7 +39,7 @@ public class LogoFade : MonoBehaviour
 
         if (disapear <= 0)
         {
-            SceneManager.LoadScene("GameSplashScene");
+            SceneManager.LoadScene("IntroScene");
         }
     }
 }
