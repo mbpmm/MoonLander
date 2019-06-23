@@ -11,12 +11,13 @@ public class LevelGen : MonoBehaviour
     public float minY; 
     public float maxY; 
     public float rndRate;
+    public float startPosX;
 
     private LineRenderer lineRenderer;
     private EdgeCollider2D edgeCollider;
     private float rndPosX;
 
-    void Start()
+    void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         edgeCollider = GetComponent<EdgeCollider2D>();
@@ -24,7 +25,12 @@ public class LevelGen : MonoBehaviour
         lineRenderer.positionCount = points;
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
-            if (i != 0)
+            if (i == 0)
+            {
+                lineRenderer.SetPosition(i, new Vector3(startPosX, Random.Range(minY, maxY), 0));
+                
+            }
+            else
             {
                 rndPosX = lineRenderer.GetPosition(i - 1).x + Random.Range(minX, maxX);
                 if ((Random.Range(0f, 1f)) <= rndRate)
@@ -36,12 +42,6 @@ public class LevelGen : MonoBehaviour
                     lineRenderer.SetPosition(i, new Vector3(rndPosX, Random.Range(minY, maxY), 0));
                 }
             }
-            else
-            {
-                lineRenderer.SetPosition(i, new Vector3(0, Random.Range(minY, maxY), 0));
-            }
-
-
         }
 
         for (int i = 0; i < lineRenderer.positionCount; i++)
@@ -51,5 +51,9 @@ public class LevelGen : MonoBehaviour
 
 
         edgeCollider.points = pointPos;
+
+        Color c1 = Color.cyan;
+        Color c2 = Color.yellow;
+        lineRenderer.SetColors(c1, c2);
     }
 }
