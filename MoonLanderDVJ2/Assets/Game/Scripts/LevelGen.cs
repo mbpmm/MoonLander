@@ -52,8 +52,7 @@ public class LevelGen : MonoBehaviour
 
         edgeCollider.points = pointPos;
 
-        Color c1 = Color.cyan;
-        Color c2 = Color.yellow;
-        lineRenderer.SetColors(c1, c2);
     }
+
+
 }

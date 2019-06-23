@@ -6,15 +6,10 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform lookAt;
 
-    public float boundX=1.0f;
-    public float boundY=0.5f;
+    public float boundX;
+    public float boundY;
     public float speed = 0.15f;
     private Vector3 desiredPos;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void LateUpdate()
@@ -46,7 +41,5 @@ public class CameraFollow : MonoBehaviour
         }
 
         transform.position = transform.position + delta;
-
-        //transform.position = Vector3.Lerp(transform.position, desiredPos, speed);
     }
 }

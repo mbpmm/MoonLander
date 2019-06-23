@@ -8,15 +8,27 @@ public class UIIntroScene : MonoBehaviour
 {
     public Button play;
     public Button quit;
+    public Canvas credits;
     // Start is called before the first frame update
     void Start()
     {
+        credits.gameObject.SetActive(false);
     }
 
     public void GoToGameScene()
     {
         LoaderManager.Get().LoadScene("GameScene");
         UILoadingScreen.Get().SetVisible(true);
+    }
+
+    public void GoToCredits()
+    {
+        credits.gameObject.SetActive(true);
+    }
+
+    public void GoToMenu()
+    {
+        credits.gameObject.SetActive(false);
     }
 
     public void Quit()
