@@ -33,17 +33,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Rotate(Vector3.forward * rotSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Rotate(Vector3.back * rotSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.Space)&&fuel>0f)
+        if ((Input.GetKey(KeyCode.Space)|| Input.GetKey(KeyCode.UpArrow) )&& fuel>0f)
         {
             playerRB.AddForce(transform.up * speed * Time.deltaTime);
             fuel -= 0.1f;
