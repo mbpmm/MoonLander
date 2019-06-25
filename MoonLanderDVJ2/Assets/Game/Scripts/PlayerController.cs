@@ -9,11 +9,15 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float rotSpeed;
     public float fuel;
+    public float gravity;
+    public float velHorizontal;
+    public float velVertical;
     public ParticleSystem fire;
-    public LayerMask raycastLayer;
     public bool onGround;
-    int rayDistance = 2;
+    private float playerRot;
+    private float velLimit = 0.4f;
     private float rotLimit = 90f;
+    private float rotLandingLimit = 1.5f;
     private Rigidbody2D playerRB;
     private Camera cam;
     private CameraFollow camFollow;
@@ -22,6 +26,8 @@ public class PlayerController : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         cam = camera.GetComponent<Camera>();
         camFollow = camera.GetComponent<CameraFollow>();
+        gravity = playerRB.gravityScale;
+        
     }
 
     // Update is called once per frame
@@ -53,12 +59,10 @@ public class PlayerController : MonoBehaviour
         if (euler.z > 180) euler.z = euler.z - 360;
         euler.z = Mathf.Clamp(euler.z, -rotLimit, rotLimit);
         transform.eulerAngles = euler;
-       // Debug.Log(playerRB.velocity.y);
-        //if (onGround && playerRB.velocity.y>0.01f)
-        //{
-        //    Explode();
-        //}
-
+        Debug.Log(playerRB.velocity);
+        velHorizontal = playerRB.velocity.x;
+        velVertical = playerRB.velocity.y;
+        playerRot = transform.rotation.eulerAngles.z;
     }
 
     public void Explode()
@@ -85,21 +89,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag=="Level")
         {
-            if ( playerRB.velocity.y < -0.4f)
+            if (velVertical < -velLimit || velHorizontal < -velLimit || velHorizontal > velLimit || playerRot<-rotLandingLimit || playerRot > rotLandingLimit)
             {
-                Debug.Log("por que no funciona");
                 Explode();
             }
             else
                 onGround = true;
         }
     }
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Level")
-    //    {
-    //        onGround = false;
-    //    }
-    //}
 }
