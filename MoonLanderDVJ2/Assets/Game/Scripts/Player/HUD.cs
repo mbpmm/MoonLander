@@ -12,6 +12,7 @@ public class HUD : MonoBehaviour
     public Text velX;
     public Text velY;
     public Text time;
+    public Text altitude;
     public GameObject player;
     public GameObject gameManager;
     public Canvas pauseMenu;
@@ -21,6 +22,7 @@ public class HUD : MonoBehaviour
     void Start()
     {
         pauseMenu.gameObject.SetActive(false);
+        gameManager = GameObject.Find("GameManager");
         playerData = player.GetComponent<PlayerController>();
         gameMan = gameManager.GetComponent<GameManager>();
     }
@@ -31,7 +33,9 @@ public class HUD : MonoBehaviour
         fuel.text = "Fuel: " + Mathf.RoundToInt(playerData.fuel);
         velX.text = "Horizontal speed: " + Math.Round(playerData.velHorizontal,3)*10;
         velY.text = "Vertical speed: " + Math.Round(playerData.velVertical,3)*10;
-        time.text = "Time: " + Mathf.RoundToInt(Time.time) +" sec.";
+        time.text = "Time: " + Mathf.RoundToInt(Time.timeSinceLevelLoad) +" sec.";
+        points.text = "Points: " + Mathf.RoundToInt(gameMan.points);
+        altitude.text = "Altitude: " + Mathf.RoundToInt(playerData.altitude);
     }
 
     public void Pause()
@@ -49,5 +53,6 @@ public class HUD : MonoBehaviour
     public void Menu()
     {
         SceneManager.LoadScene("IntroScene");
+        Destroy(GameObject.Find("GameManager"));
     }
 }

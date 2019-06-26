@@ -17,8 +17,7 @@ public class UIIntroScene : MonoBehaviour
 
     public void GoToGameScene()
     {
-        LoaderManager.Get().LoadScene("GameScene");
-        UILoadingScreen.Get().SetVisible(true);
+        SceneManager.LoadScene("GameScene");
     }
 
     public void GoToCredits()
