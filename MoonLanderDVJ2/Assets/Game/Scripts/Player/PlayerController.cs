@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public bool onGround;
     public bool isDestroyed;
     public bool canMove;
+    private float limitXMax = 280f;
+    private float limitXMin = -10f;
     private float altitudeMult=100f;
     private float playerRot;
     private float velLimit = 0.4f;
@@ -70,6 +72,18 @@ public class PlayerController : MonoBehaviour
         playerRB.gravityScale = gravity;
         altitude = transform.position.y * altitudeMult;
         //GetAlt(); NO FUNCIONA NO SE POR QUE
+
+        if (transform.position.x <= limitXMin)
+        {
+            transform.position = new Vector3(limitXMin, transform.position.y, transform.position.z);
+            playerRB.velocity =new Vector2(0f,playerRB.velocity.y);
+        }
+
+        if (transform.position.x >= limitXMax)
+        {
+            transform.position = new Vector3(limitXMax, transform.position.y, transform.position.z);
+            playerRB.velocity = new Vector2(0f, playerRB.velocity.y);
+        }
     }
 
     public void GetAlt()

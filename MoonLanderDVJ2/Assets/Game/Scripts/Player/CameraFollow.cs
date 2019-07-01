@@ -8,6 +8,7 @@ public class CameraFollow : MonoBehaviour
 
     public float boundX;
     public float boundY;
+    
     public float speed = 0.15f;
     private Vector3 desiredPos;
 
@@ -40,6 +41,9 @@ public class CameraFollow : MonoBehaviour
                 delta.y = dy + boundY;
         }
 
+        
+
+        
         transform.position = transform.position + delta;
     }
 }
